@@ -1,0 +1,37 @@
+// view 标签属性 hover-class，长按时的背景颜色
+.def-hover {
+	background-color: rgba(#eee, .1);
+}
+
+.over-hidden {
+	overflow: hidden;
+}
+
+@mixin text-cut-fn($line) {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	-webkit-box-orient: vertical;
+}
+
+// 多行文本溢出显示省略号
+.text-cut-2{
+	@include text-cut-fn(2);
+}
+
+.text-cut-3{
+	@include text-cut-fn(3);
+}
+
+
+.rotate-180 {
+	transform: rotate(180deg);
+}
+
+.flex-none {
+	flex: none;
+}
+
+.flex-auto {
+	flex: auto;
+}
