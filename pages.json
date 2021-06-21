@@ -4,24 +4,27 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/mian/home-villager/home-villager",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "数字乡村"
 			}
 		}
-	    ,{
-            "path" : "pages/news/news",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
+	"subPackages": [{
+			"root": "pages/article",
+			"pages": []
+		},
+		{
+			"root": "pages/form",
+			"pages": []
+		}, {
+			"root": "pages/other",
+			"pages": []
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "数字乡村",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

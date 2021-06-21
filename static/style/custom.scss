@@ -10,6 +10,7 @@
 @mixin text-cut-fn($line) {
 	overflow: hidden;
 	display: -webkit-box;
+	word-break: break-all;
 	-webkit-line-clamp: $line;
 	-webkit-box-orient: vertical;
 }

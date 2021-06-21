@@ -61,24 +61,6 @@ const store = new Vuex.Store({
 				}
 			})
 		},
-		/**
-		 * 创建全局长连接
-		 */
-		async createGlobalSocket({
-			commit
-		}, options)  {
-		
-			let socket = new SocketGlobal(options);
-		
-			await socket.open();
-			
-			socket.setOnMessage((res) => {
-				//收到新消息存入vuex
-				commit('setNewMessage', res.data + new Date())
-			});
-		
-			commit('MOUNT_GLOBAL_SOCKET', socket);
-		}
 	}
 })
 

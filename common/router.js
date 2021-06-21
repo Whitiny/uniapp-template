@@ -2,12 +2,20 @@ import utils from './utils.js';
 
 function route(url, params = {}, options = {}, routeFn) {
 	return new Promise((resolve, reject) => {
-
-		let opts = Object.assign({
-			'url': url + utils.obj2UrlParams(params),
+		
+		if(!isString(url)) url = '' + url;
+		
+		let index = url.indexOf('?'),
+			urlParams = index !== -1? utils.obj2UrlParams(params, '') : utils.obj2UrlParams(params);
+		
+		if(index !== url.length - 1) url += '&';	
+		
+		let opts = {
+			'url': url + urlParams,
 			success: (res) => resolve(res),
-			fail: (err) => reject(err)
-		}, options);
+			fail: (err) => reject(err),
+			...options
+		};
 
 		uni[routeFn](opts);
 	})

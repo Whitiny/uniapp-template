@@ -149,8 +149,8 @@ function checkNetwork(showToast = true) {
  * @param {Object} params JSON对象类型参数集
  * @return {String}
  */
-function obj2UrlParams(params = {}) {
-	let res = '?';
+function obj2UrlParams(params = {}, prefix = '?') {
+	let res = prefix;
 
 	try {
 		for (var key in params) {
@@ -162,7 +162,8 @@ function obj2UrlParams(params = {}) {
 		//TODO handle the exception
 	}
 
-	res = res.substr(0, res.length - 1);
+	if(params.keys().length > 0) res = res.substr(0, res.length - 1);
+	
 	return res;
 }
 
@@ -185,10 +186,73 @@ function urlParams2Obj(url) {
 	return obj
 }
 
+/**
+ * 函数节流
+ * @param {Function} fn 
+ * @param {Number} delay 毫秒数，默认300
+ */
+function throttle(fn, delay = 300) {
+	let timer = null;
+
+	return function () {
+		if (timer) return;
+		
+		timer = setTimeout(() => {
+			fn.apply(this, arguments);
+			timer = null;
+		}, delay)
+	}
+}
+
+/**
+ * 函数防抖
+ * @param {Function} fn 
+ * @param {Number} delay 毫秒数，默认300
+ */
+function debounce(fn, delay = 300) {
+    let timeout = null;
+	
+    return function () {
+        clearTimeout(timeout);
+		
+        timeout = setTimeout(() => {
+            fn.apply(this, arguments);
+        }, delay);
+    };
+}
+
 import * as luchUtils from './http/luch-request/utils.js';
 
+// 补全 luchUtils 中没有的类型校验
+
+/**
+ * 是否为 number 值
+ * @param val
+ * @returns {boolean}
+ */
+function isNumber(val) {
+	return typeof val === 'number'
+}
+
+/**
+ * 是否为 function 值
+ * @param val
+ * @returns {boolean}
+ */
+function isFunction(val) {
+	return typeof val === 'function'
+}
+
+/**
+ * 是否为 string 值
+ * @param val
+ * @returns {boolean}
+ */
+function isString(val) {
+	return typeof val === 'string'
+}
+
 export default {
-	...luchUtils,
 
 	sleep,
 	toast,
@@ -201,5 +265,13 @@ export default {
 	checkNetwork,
 
 	obj2UrlParams,
-	urlParams2Obj
+	urlParams2Obj,
+	
+	throttle,
+	debounce,
+	
+	...luchUtils,
+	isNumber,
+	isFunction,
+	isString,
 };
